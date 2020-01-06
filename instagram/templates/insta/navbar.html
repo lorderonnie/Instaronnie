@@ -62,11 +62,27 @@
 }
 </style>
 <body>
+
 <div class="topnav">
+{% if user.is_authenticated %}
   <a class="active" href="#home">Home</a>
-  <a href="#about">About</a>
-  <a href="#contact">Contact</a>
-{% comment %} <div style="float:right;" >
+<ul>
+  <li>
+      <a href="/accounts/password/change">Change Password</a>
+    </li>
+    <li>
+      <a href="/logout">Logout</a>
+    </li>
+  </ul>
+</ul>
+{% else %}
+<ul>
+<li>
+      <a class='btn btn-default' href="/accounts/login">Login</a>
+    </li>
+</ul>
+{% endif %}
+{% comment %} <div>
     <form class="navbar-form" role="search" action="{% url 'search_results' %}">
 
       <div class="input-group">
@@ -77,7 +93,7 @@
       </div>
 
     </form>
-</div> {% endcomment %}
+</div>  {% endcomment %}
 </div>
 </body>
 </html>
