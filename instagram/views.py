@@ -7,7 +7,8 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from .forms import UpdateProfileForm,UserUpdateform,Loginform,RegisterForm,NewPostForm
 from .models import Photos,Profile,Comments
- 
+from .email import send_register_confirm_email
+
 # @login_required(login_url="/accounts/login/") 
 def Gram(request):
     photo = Photos.objects.all()
@@ -70,6 +71,7 @@ def register(request):
             else:
                 user = User.objects.create_user(username = username,password = password,email = email,first_name = first_name,last_name = last_name,)
                 user.save()
+                send_register_confirm_email(username,email)
                 return redirect('home')
         else:
             messages.info(request,'passwords should match')
