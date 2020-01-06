@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
@@ -6,9 +7,13 @@ from . import views
 
 
 urlpatterns=[
-    path('',views.agram,name = 'home'),
-    # path('search/', views.search_results, name='search_results'), 
-    
-] 
+    url(r'^$',views.Home,name = 'home'),
+    path('instagram/insta/profile/',views.profile,name="profile"),
+    url(r'^editprofile/$',views.edit_profile,name='editprofile'),
+    url(r'^search/',views.search_results,name = 'search_results'),    
+]
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 

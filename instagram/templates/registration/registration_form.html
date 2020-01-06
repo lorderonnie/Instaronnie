@@ -1,43 +1,52 @@
-{% extends "registartion/base.html"%}
+{% extends "registration/base.html"%}
+{% load bootstrap3 %}
 {% block content %}
-<div class="container">
-    <div class="row">
-
-    <div class="col-md-4"></div>
-      <div class="col-md-4">
-      {% if form.errors %}
-        <p> Some Information Might be Incorrect </p>
-      {% endif %}
-      <div class="panel panel-default">
-
-        <div class="panel-heading">
-          <h3 class="text-center">Sign Up</h3>
-        </div>
-        <div class="panel-body">
-
-          <form  action="/accounts/register/" method="post">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            <div class="form-group">
-              <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
-            </div>
-
-            <input type="hidden" name="next" value="{{next}}">
-
-          </form>
-
-        </div>
-
-      </div>
-
+<style>
+    body{
+        background-color:grey;
+    }
+    #strand{
+        position:absolute;
+        top:30%;
+        left:40%;
+    }
+    #strand, #strand input[type=text,email,password]{
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+    }
+    #strand, #strand input[type=text,email,password]{
+        border: 1px solid #ccc;
+    }
+    h1{
+        text-align:center;
+        font-size:120px;
+    }
+</style>
+<body>
+<h1>SIGN-UP</h1>
+<div id="strand">
+    <form method="POST" action="register/" >
+        {% csrf_token%}
+        <input type="text"  name="username" placeholder="Your username"><br><br>
+        <input type="text" name="first_name" placeholder="Your first name"><br><br>
+        <input type="text" name="last_name" placeholder="Your last name"><br><br>
+        <input type="email" name="email" placeholder="Your email"><br><br>
+        <input type="password" name="password" placeholder="Password"><br><br>
+        <input type="password" name="password1" placeholder="Confirm password"><br><br>
+        <input class="btn btn-primary" type="submit">
+    </form>
+    <div>
+        {% for message in messages%}
+            <h3>{{message}}</h3>
+        {% endfor %}
     </div>
-    <!-- empty div -->
-    <div class="col-md-4"></div>
-  </div>
 </div>
 
 {% endblock %}
-
 
 
 

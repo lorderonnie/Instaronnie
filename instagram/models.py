@@ -1,31 +1,54 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class Gram(models.Model):
-    first_name = models.CharField(max_length =30)
-    last_name = models.CharField(max_length =30)
-    phone_number = models.CharField(max_length = 10,blank =True)
-    
+class Profile(models.Model):
+    profile_pic = models.ImageField(upload_to='media/')
+    bio = models.CharField(max_length=300)
+    username = models.CharField(max_length=50,default='Your username')
+
     def __str__(self):
-        return self.first_name
-    def save_gram(self):
+        return self.username
+
+    def search_user(self,cls,username):
+        found_user = User.objects.get(username = username)
+
+    def save_profile(self):
         self.save()
 
-
+    def delete_profile(self):
+        self.delete()
         
-class Accounts(models.Model):
-    image= models.ImageField(upload_to ='home/')
-    name = models.CharField(max_length =60)
-    description = models.TextField()
-   
+class Photos(models.Model):
+    picture = models.ImageField(upload_to= 'media/')
+    name = models.CharField(max_length=50)
+    caption = models.CharField(max_length=300)
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    likes = models.ManyToManyField(User, related_name='likes' ,blank=True,)
+
     @classmethod
-    def search_by_name(cls,search_term):
-        accounts = cls.objects.filter(name__icontains=search_term)
-        return accounts
-    
+    def get_all_photos(cls):
+        photos = cls.objects.all()
+
+        return photos
+
     @classmethod
-    def all_accounts(cls):
-       accounts= cls.objects.all()
-       return accounts
+    def get_photos_by_name(cls,name):
+        photos = cls.objects.filter(posted_by= name)
+
+        return photos        
+     
     
-    def save_account(self):
+    def save_photo(self):
         self.save()
+
+    def delete_photo(self):
+        self.delete()   
+        
+        
+
+
+class Comment(models.Model):
+    comment = models.CharField(max_length=500)
+    posted_by = models.ForeignKey(User, on_delete = models.CASCADE)
+    posted_on = models.DateField(auto_now_add=True)
+    image_id = models.ForeignKey(Photos,on_delete= models.CASCADE)       

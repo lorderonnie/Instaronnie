@@ -22,5 +22,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('instagram.urls')),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
-    url(r'^logout/$', views.logout, {"next_page": '/'}), 
 ]
