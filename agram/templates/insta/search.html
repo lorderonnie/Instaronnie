@@ -1,0 +1,47 @@
+{% extends 'gallery/base.html'%} 
+{% block content %}
+<style>
+</style>
+
+<body>
+<div class="container">
+
+  <div class="row">
+    {% if name%}
+      <h2>Found {{ name|length }} of searched term {{message}}</h2>
+    {% else %}
+      <h2> Found 0 names for the search term {{message}}</h2>
+    {% endif %}
+
+  </div>
+
+  <div class="row">
+
+  {% if name %}
+    {% for name in name %}
+      <div class="col-sm-6 col-md-3">
+          <h1>{{name.title}}</h1>
+      </div>
+    {% endfor %}
+  {% endif %}
+  </div>
+</div>
+</body>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
