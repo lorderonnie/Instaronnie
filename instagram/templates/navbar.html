@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MyGallery</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+#mySidenav a {
+  position: absolute; 
+  left: -80px; 
+  transition: 0.3s; 
+  padding: 15px; 
+  width: 100px; 
+  text-decoration: none; 
+  font-size: 20px;
+  color: white; 
+  border-radius: 0 5px 5px 0; 
+}
+#mySidenav a:hover {
+  left: 0; 
+}
+#about {
+  top: 20px;
+  font-family: 'Prata', serif;
+  background-color: purple;
+}
+#blog {
+  top: 80px;
+  font-family: 'Prata', serif;
+  background-color: purple;
+}
+
+#projects {
+  top: 140px;
+  font-family: 'Prata', serif;
+  background-color: purple; 
+}
+
+#contact {
+  top: 200px;
+  font-family: 'Prata', serif;
+  background-color: purple;
+}
+.from button[type=submit]{
+ position:absolute;
+  top:2%;
+  left:57%;
+}
+ .from input[type=text] {
+  float: right;
+  position:absolute;
+  top:1%;
+  left:37%;
+  padding: 6px;
+  background-color:transparent;
+  color:white;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+  
+}
+</style>
+<body>
+
+<div class="topnav">
+<div id="mySidenav" class="sidenav">
+  <a href="#" id="about">Home</a>
+  <a href="#" id="blog">Profile</a>
+  <a href="#" id="projects">log in</a>
+  <a href="#" id="contact">log out</a>
+</div>
+<div class="from">
+<input type="text" placeholder="Search.." style="color:white;">
+<button type="submit" class="btn btn-dark" >Search</button>
+</div>
+</div>
+</body>
+</html>

@@ -6,20 +6,20 @@
   <meta charset="utf-8">
 
   {% if title %}
-  <title>INSTARONNIE {{title}}</title>
+  <title> INSTARONNIE {{title}}</title>
   {% else %}
-    <title>INSTARONNIE </title>
+    <title> INSTARONNIE </title>
   {% endif %}
 
     {% block styles %}
         {% bootstrap_css %}
-        <link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Fondamento|Gelasio|Prata&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'css/agram.css'%}">
     {% endblock %}
 </head>
 
 <body>
-    {% include "insta/navbar.html" %}
+    {% include "navbar.html" %}
     
     {% block content %}
     {% endblock %}

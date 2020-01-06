@@ -8,16 +8,16 @@ from django.contrib.auth import logout
 from .forms import EditProfileForm,Loginform,RegisterForm,NewPostForm
 
  
-@login_required(login_url="/accounts/login/") 
-def Home(request):
-    home = Home.all_accounts()
-    return  render(request,'insta/home.html',{"home":home})
+# @login_required(login_url="/accounts/login/") 
+def Gram(request):
+    photo = Photos.objects.all()
+    return  render(request,'home.html',{"photo":photo})
 
 def like(request):
-    photos = get_object_or_404(Photos,id=request.POST.get('ig_pic_id'))
+    photos = get_object_or_404(Photos,id=request.POST.get('picture_id'))
     user = request.User
     photos.likes.add(user)
-    return (redirect,'timeline')
+    return (redirect,'home')
 
 @login_required(login_url = '/accounts/login/')
 def new_post(request):
@@ -28,7 +28,7 @@ def new_post(request):
             post.user = request.user
             post.save()
 
-            return redirect('timeline')
+            return redirect('home')
 
     else:
         form = NewPostForm()
@@ -42,11 +42,11 @@ def search_results(request):
         searched_name = search_results.search_by_name(search_term)
         message = f"{search_term}"
 
-        return render(request, 'insta/search.html',{"message":message,"name": searched_name})
+        return render(request, 'search.html',{"message":message,"name": searched_name})
 
     else:
         message = "You haven't searched for any term"
-        return render(request, 'insta/search.html',{"message":message})
+        return render(request, 'search.html',{"message":message})
  
 
 @login_required(login_url="/accounts/login/")

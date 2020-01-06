@@ -7,8 +7,8 @@ from . import views
 
 
 urlpatterns=[
-    url(r'^$',views.Home,name = 'home'),
-    path('instagram/insta/profile/',views.profile,name="profile"),
+    url(r'^$',views.Gram,name = 'photo'),
+    path('instagram/profile/',views.profile,name="profile"),
     url(r'^editprofile/$',views.edit_profile,name='editprofile'),
     url(r'^search/',views.search_results,name = 'search_results'),    
 ]
