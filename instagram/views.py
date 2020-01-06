@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import logout
-from .forms import EditProfileForm,Loginform,RegisterForm,NewPostForm
-
+from .forms import UpdateProfileForm,UserUpdateform,Loginform,RegisterForm,NewPostForm
+from .models import Photos,Profile,Comments
  
 # @login_required(login_url="/accounts/login/") 
 def Gram(request):
@@ -82,25 +82,28 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
-@login_required(login_url = '/accounts/login/')
+@login_required
 def profile(request):
-  my_posts = Photos.user_pics(request.user)
-  return render(request,'profile.html',{'my_posts':my_posts})
+    name = request.user
+    profile = Profile.get_profile_by_name(name)
+    photos = Photos.get_images_by_name(name)
 
-@login_required(login_url = '/accounts/login/')
-def edit_profile(request):
-    if request.method=='POST':
-      form = EditProfileForm(request.POST,request.FILES,instance=request.user.profile)
-      if form.is_valid():
-          form.save()
-          return redirect('profile')
-
-      else:
-          form = EditProfileForm(instance=request.user)
-      return render(request,'profile.html',{'form':form})
+    return render(request,"profile.html",{"profile":profile,"photos":photos,"name":name})
     
-    
-    
+@login_required
+def updateprofile(request):
+   
+    if request.method == 'POST':
+        form = UpdateProfileForm(request.POST,request.FILES,instance=request.user.profile)
+        form1 = UserUpdateform(request.POST,instance=request.user)
+        if form.is_valid() and form1.is_valid():
+            form1.save() 
+            form.save()
+            return redirect('profile')
+    else:
+        form = UpdateProfileForm(instance=request.user.profile)
+        form1 = UserUpdateform(instance=request.user)
+    return render(request,"updateprofile.html",{"form":form,"form1":form1})
     
     
     

@@ -9,7 +9,7 @@ from . import views
 urlpatterns=[
     url(r'^$',views.Gram,name = 'photo'),
     path('instagram/profile/',views.profile,name="profile"),
-    url(r'^editprofile/$',views.edit_profile,name='editprofile'),
+    url(r'^updateprofile/$',views.updateprofile,name='updateprofile'),
     url(r'^search/',views.search_results,name = 'search_results'),    
 ]
 

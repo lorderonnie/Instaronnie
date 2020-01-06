@@ -1,0 +1,32 @@
+{% comment %} {% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    
+    <div class="row">
+            <div class="card" style="width:400px">
+                    <h4 style="text-align: center;"  class="card-title pictitle"> {{post.name}} </h4>
+                    <img class="card-img-top" width="500px" height="450px" src=" {{post.ig_pic.url}}"  alt="{{post.name}}">
+                    <div class="card-body">
+                      <h4 class="card-title"> {{post.caption}}</h4>
+                      <p class="card-text"><b>Posted by:</b> {{post.user}} </p>
+                      <p class="card-text">Likes: {{post.likes.count}}</p>
+
+                      <a href="{%url 'comment' post.id%}" class="btn btn-primary">Comment</a>
+                      <form action="{% url 'like' %}" method="post">
+                            {% csrf_token %}
+                            <button class="like" type="submit" name="post_id" value="{{post.id}}">
+                          </button>
+                          </form>
+
+                          {% for comment in comments%}
+                            {{comment.text}}
+                          {% empty%}
+                          <p>empty nani</p> 
+                            {% endfor%}
+
+                    </div>
+</div>
+{% endblock %} {% endcomment %}

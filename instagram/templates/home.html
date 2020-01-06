@@ -121,7 +121,28 @@ h1{
             <h2 style="color:black,font-family: 'Fondamento', cursive;">WELCOME TO <br><span>INSTARONNIE</span></h2>
         </div>
       </div>
+</div><br>
+<div class="container">
+        <h2 style="text-align: center;">Home feed</h2>
+<div class="row">
+  {% for photo in Photos %}
+  <div class="card" style="width:450px">
+    <h4 style="text-align: center;"  class="card-title pictitle"> {{photo.name}} </h4>
+    <a href="/pic/{{photo.id}}">
+    <img class="timelinepics card-img-top" width="500px" height="450px" src=" {{photo.url}} " alt="Image"></a>
+    <div class="card-body">
+      
+      <p style="text-align: center;" class="card-text">{{pic.caption}}</p>
+      <p class="card-text">Posted by: {{photo.user}}</p>
+      <div class="card-footer">
+            <a href="{% url 'comment' photo.id%}" class="btn btn-outline "> <button>Comment</button></a>
+            
+              
+      </div>
+      
+    </div>
 </div>
+{% endfor %}
 </body>
 
 {% endblock %}
