@@ -9,7 +9,7 @@ from .forms import UpdateProfileForm,UserUpdateform,Loginform,RegisterForm,NewPo
 from .models import Photos,Profile,Comments
 from .email import send_register_confirm_email
 
-# @login_required(login_url="/accounts/login/") 
+@login_required(login_url="/accounts/login/") 
 def Gram(request):
     photo = Photos.objects.all()
     return  render(request,'home.html',{"photo":photo})
