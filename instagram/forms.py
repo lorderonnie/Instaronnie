@@ -3,7 +3,7 @@ from .models import Photos,Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
-
+from .models import Photos,Profile,Comments
 class UserUpdateform(forms.ModelForm):
   email = forms.EmailField()
   class Meta:
@@ -22,7 +22,12 @@ class UpdateProfileForm(forms.ModelForm):
             'followers',
             'following',
 ]
-
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comments
+        fields = [
+            'comment'
+]
 class Loginform(forms.Form):
     username =forms.CharField(label='Your username',max_length= 50)
     password = forms.CharField(widget=forms.PasswordInput)

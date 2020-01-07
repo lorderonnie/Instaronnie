@@ -5,20 +5,39 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import logout
-from .forms import UpdateProfileForm,UserUpdateform,Loginform,RegisterForm,NewPostForm
+from .forms import UpdateProfileForm,CommentForm,UserUpdateform,Loginform,RegisterForm,NewPostForm
 from .models import Photos,Profile,Comments
 from .email import send_register_confirm_email
 
-@login_required(login_url="/accounts/login/") 
+
+@login_required
 def Gram(request):
-    photo = Photos.objects.all()
-    return  render(request,'home.html',{"photo":photo})
+    '''
+    this is a view function that renders our homepage
+    '''
+    current_user = request.user
+    photos = Photos.get_all_photos()
+    users = User.objects.all()
+    
+    return render(request,"home.html",{"photos":photos,"current_user":current_user,"users":users,})
 
 def like(request):
     photos = get_object_or_404(Photos,id=request.POST.get('picture_id'))
     user = request.User
     photos.likes.add(user)
-    return (redirect,'home')
+    return (redirect,'Gram')
+
+def follow(request):
+    '''
+    views function that handles the follow functionality
+    '''
+    user = request.user
+    follow = get_object_or_404(Profile,user= request.POST.get('usr.id'))
+    if follow.followers.filter(id = user.id).exists():
+        follow.followers.remove(user)
+    else:
+        follow.followers.add(user)
+    return redirect('home')
 
 @login_required(login_url = '/accounts/login/')
 def new_post(request):
@@ -49,7 +68,45 @@ def search_results(request):
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
  
+def find(request):
+    current_user = request.user
+    profile = get_object_or_404(Profile,user = current_user.id)
+    usrs = User.objects.all()
+    noUser = []
+    users=[]
+    for user in usrs:
+        if profile.followers.filter(id = user.id).exists():
+            noUser.append(user)
+        else:
+            users.append(user)
+    return render(request,'General/find.html',{"users":users,"noUser":noUser})
+def comment(request,id):
+    
+    if request.method =='POST':
+        photo = get_object_or_404(Photos,id =id)
+        form = CommentForm(request.POST)
 
+        if form.is_valid():
+            photoComment = form.save(commit = False)
+            photoComment.posted_by = request.user
+            photo = Photos.objects.get(id = id)
+            photoComment.photo_id = photo
+            photoComment.save()
+            return redirect('home')
+
+    else:
+        form =CommentForm()
+        image = get_object_or_404(Photos,id =id)
+        id = image.id
+    return render(request,'General/comment.html',{"form":form,"id":id})
+
+def comment_view(request,id):
+    '''
+    view function that contains the view comments functionality
+    '''
+    photo = Photos.objects.filter(id=id)
+    comments = Comments.objects.filter(image_id = id)
+    return render(request,'General/image.html',{"photo":photo,"comments":comments})
 @login_required(login_url="/accounts/login/")
 def logout(request):
   
@@ -80,9 +137,8 @@ def register(request):
     else:
         return render(request,'registration/registration_form.html')
 
-def logout_view(request):
-    logout(request)
-    return redirect('/')
+
+
 
 @login_required
 def profile(request):

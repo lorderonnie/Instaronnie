@@ -70,13 +70,19 @@
 <div class="topnav">
 <div id="mySidenav" class="sidenav">
   <a href="#" id="about">Home</a>
-  <a href="#" id="blog">Profile</a>
-  <a href="#" id="projects">log in</a>
-  <a href="#" id="contact">log out</a>
+  <a href="{% url 'profile'%}" id="blog">Profile</a>
+  <a href="/accounts/password/change" id="projects">change</a>
+  <a href="{% url 'logout'%}" id="contact">log out</a>
 </div>
 <div class="from">
-<input type="text" placeholder="Search.." style="color:white;">
-<button type="submit" class="btn btn-dark" >Search</button>
+ <form action="{% url 'search'%}" method="POST" enctype="multipart/form-data">
+    {% csrf_token%}
+    <input type="text" name="search"  placeholder="Search" />
+    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+</form>
+ {% for message in messages%}
+    <p>{{message}}</p>
+  {% endfor %}
 </div>
 </div>
 </body>
