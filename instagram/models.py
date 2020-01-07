@@ -2,25 +2,26 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Profile(models.Model):
-    profile_pic = models.ImageField(upload_to='media/')
-    bio = models.CharField(max_length=300)
-    username = models.CharField(max_length=50,default='Your username')
+    '''
+    this is a model class that defines how a user profile will be created
+    '''
+    user  = models.OneToOneField(User, on_delete = models.CASCADE)
+    profile_pic = models.ImageField(upload_to = 'images/', default='default.jpg')
+    bio =models.TextField()
+    followers = models.ManyToManyField(User,blank = True,related_name='followers')
+    following = models.ManyToManyField(User,blank = True,related_name='following')
+    updated_on = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.username
 
-    def search_user(self,cls,username):
-        found_user = User.objects.get(username = username)
+    
+    @classmethod
+    def get_profile_by_name(cls,name):
+        '''
+        this is a class method that gets a profile by name
+        '''
+        profile = cls.objects.filter(user = name)
 
-    def save_profile(self):
-        self.save()
-
-    def delete_profile(self):
-        self.delete()
-        
-    @property
-    def all_likes(self):
-        return self.likes.count()   
+        return    
 class Photos(models.Model):
     picture = models.ImageField(upload_to= 'media/')
     name = models.CharField(max_length=50)
@@ -35,7 +36,7 @@ class Photos(models.Model):
 
     @classmethod
     def get_photos_by_name(cls,name):
-        photos = cls.objects.filter(posted_by= name)
+        photos = cls.objects.filter(name= name)
         return photos        
      
     def save_photo(self):

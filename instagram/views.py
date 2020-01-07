@@ -79,7 +79,7 @@ def find(request):
             noUser.append(user)
         else:
             users.append(user)
-    return render(request,'General/find.html',{"users":users,"noUser":noUser})
+    return render(request,'find.html',{"users":users,"noUser":noUser})
 def comment(request,id):
     
     if request.method =='POST':
@@ -98,7 +98,7 @@ def comment(request,id):
         form =CommentForm()
         image = get_object_or_404(Photos,id =id)
         id = image.id
-    return render(request,'General/comment.html',{"form":form,"id":id})
+    return render(request,'comment.html',{"form":form,"id":id})
 
 def comment_view(request,id):
     '''
@@ -106,7 +106,7 @@ def comment_view(request,id):
     '''
     photo = Photos.objects.filter(id=id)
     comments = Comments.objects.filter(image_id = id)
-    return render(request,'General/image.html',{"photo":photo,"comments":comments})
+    return render(request,'pic.html',{"photo":photo,"comments":comments})
 @login_required(login_url="/accounts/login/")
 def logout(request):
   
@@ -118,7 +118,7 @@ def logout(request):
 def profile(request):
     name = request.user
     profile = Profile.get_profile_by_name(name)
-    photos = Photos.get_images_by_name(name)
+    photos = Photos.get_photos_by_name(name)
 
     return render(request,"profile.html",{"profile":profile,"photos":photos,"name":name})
     
