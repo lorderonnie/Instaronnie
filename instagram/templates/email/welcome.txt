@@ -1,1 +1,1 @@
-Hello {{name}} register successfull.Welcome to Instaronnie please enjoy chatting and interacting with others but observe the community guidelines.Thankyou
+Hello {{name}} register successfull.Welcome to Instaronnie please enjoy chatting and interacting with others but observe the community guidelines.Thankyou very much!!
