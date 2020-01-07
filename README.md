@@ -28,4 +28,4 @@ INSTALLATIONS USED:
   Incase of any other bug contact me via email :rontheking45@gmail.com
 ### License
 MIT licence
-Copyright (c)2019 **Ronald mwambia & Moringa School**
+Copyright (c)2020 **Ronald mwambia & Moringa School**
