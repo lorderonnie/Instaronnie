@@ -1,4 +1,4 @@
-{% comment %} {% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load bootstrap4 %}
 {% load static %}
 
@@ -24,9 +24,9 @@
                           {% for comment in comments%}
                             {{comment.text}}
                           {% empty%}
-                          <p>empty nani</p> 
+                          <p>empty</p> 
                             {% endfor%}
 
                     </div>
 </div>
-{% endblock %} {% endcomment %}
+{% endblock %} 
