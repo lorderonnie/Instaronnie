@@ -8,6 +8,7 @@
 * WI-FI or bundles to access the internet
 * Access to git hub and clone this link to see the code:https://github.com/lorderonnie/Instaronnie
 * Heroku account to deploy or see the page it self
+* Practice the code and try to perfect
 ## Known Bugs
  None so far.
 ## Technologies Used  
