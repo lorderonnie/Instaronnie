@@ -47,32 +47,32 @@ class NewPostForm(forms.ModelForm):
     class Meta:
         model = Photos
         exclude = ['user','likes']
-class RegisterForm(forms.ModelForm):
-    email = forms.EmailField(label='Email')
-    email2 = forms.EmailField(label='confirm email')
-    username = forms.CharField(label='your username')
-    password = forms.CharField(widget=forms.PasswordInput)
+        
+# class RegisterForm(forms.ModelForm):
+#     email = forms.EmailField(label='Email')
+#     email2 = forms.EmailField(label='confirm email')
+#     username = forms.CharField(label='your username')
+#     password = forms.CharField(widget=forms.PasswordInput)
     
-    class Meta:
-        model = User
-        fields = [
-            'username',
-            'email',
-            'email2',
-            'password',
-            
-        ]
-    def clean_password(self):
-        email = self.cleaned_data.get('email')
-        email2 = self.cleaned_data.get('email2')
-        username = self.cleaned_data.get('username')
+#     class Meta:
+#         model = User
+#         fields = [
+#             'username',
+#             'email',
+#             'email2',
+#             'password', 
+#         ]
+#     def clean_password(self):
+#         email = self.cleaned_data.get('email')
+#         email2 = self.cleaned_data.get('email2')
+#         username = self.cleaned_data.get('username')
 
-        if email != email2:
-            raise forms.ValidationError('email must match')
-        user = User.objects.filter(username = username)
-        if user.exists():
-            raise forms.ValidationError('This username exists!')
-        return username 
+#         if email != email2:
+#             raise forms.ValidationError('email must match')
+#         user = User.objects.filter(username = username)
+#         if user.exists():
+#             raise forms.ValidationError('This username exists!')
+#         return username 
 
 
 

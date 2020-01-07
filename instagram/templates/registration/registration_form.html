@@ -33,14 +33,9 @@
 <body>
 <h1>SIGN-UP</h1>
 <div id="strand">
-    <form method="POST" action="register/" >
+    <form method="POST" action="/accounts/register/" >
         {% csrf_token%}
-        <input type="text"  name="username" placeholder="Your username"><br><br>
-        <input type="text" name="first_name" placeholder="Your first name"><br><br>
-        <input type="text" name="last_name" placeholder="Your last name"><br><br>
-        <input type="email" name="email" placeholder="Your email"><br><br>
-        <input type="password" name="password" placeholder="Password"><br><br>
-        <input type="password" name="password1" placeholder="Confirm password"><br><br>
+        {% bootstrap_form form %}
         <input class="btn btn-primary" type="submit">
     </form>
     <div>
@@ -49,6 +44,7 @@
         {% endfor %}
     </div>
 </div>
+</body>
 
 {% endblock %}
 

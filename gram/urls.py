@@ -17,13 +17,11 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls import url
 from django.contrib.auth import views 
-from instagram.views import Gram,register,logout
+from instagram.views import Gram,logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('instagram.urls')),
-    path('accounts/',include('registration.backends.simple.urls')),
-    path('accounts/login/account/register/',register,name = 'register'),
-    path('accounts/login/account/register/register/',register,name = 'register'),
+    url(r'^accounts/',include('registration.backends.simple.urls')),
     path('tinymce/', include('tinymce.urls')),
 ]

@@ -78,7 +78,7 @@
  <form action="{% url 'search'%}" method="POST" enctype="multipart/form-data">
     {% csrf_token%}
     <input type="text" name="search"  placeholder="Search" />
-    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
 </form>
  {% for message in messages%}
     <p>{{message}}</p>
