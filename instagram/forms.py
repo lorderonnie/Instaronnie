@@ -25,8 +25,7 @@ class UpdateProfileForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comments
-        fields = [
-            'comment'
+        fields = ['comment'
 ]
 class Loginform(forms.Form):
     username =forms.CharField(label='Your username',max_length= 50)
