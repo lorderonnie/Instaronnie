@@ -8,9 +8,7 @@ class Profile(models.Model):
     user  = models.OneToOneField(User, on_delete = models.CASCADE)
     profile_pic = models.ImageField(upload_to = 'images/', default='default.jpg')
     bio =models.TextField()
-    followers = models.ManyToManyField(User,blank = True,related_name='followers')
-    following = models.ManyToManyField(User,blank = True,related_name='following')
-    updated_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now_add=True, default='')
 
 
     
@@ -21,7 +19,12 @@ class Profile(models.Model):
         '''
         profile = cls.objects.filter(user = name)
 
-        return    
+        return  name 
+    # @classmethod
+    # def update_profile(cls,name):
+    #     profile = cls.objects.filter(user = name)
+        
+    #     return name
 class Photos(models.Model):
     picture = models.ImageField(upload_to= 'media/')
     name = models.CharField(max_length=50)
