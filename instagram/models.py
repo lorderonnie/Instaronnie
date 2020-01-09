@@ -63,7 +63,7 @@ class Comments(models.Model):
     comment = models.CharField(max_length=500)
     posted_by = models.ForeignKey(User, on_delete = models.CASCADE)
     posted_on = models.DateField(auto_now_add=True)
-    image_id = models.ForeignKey(Photos,on_delete= models.CASCADE)       
+    photo_id = models.ForeignKey(Photos,on_delete= models.CASCADE)       
     def __str__(self):
         return self.user
 

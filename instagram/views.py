@@ -105,7 +105,7 @@ def comment_view(request,id):
     view function that contains the view comments functionality
     '''
     photo = Photos.objects.filter(id=id)
-    comments = Comments.objects.filter(image_id = id)
+    comments = Comments.objects.filter(photo_id = id)
     return render(request,'pic.html',{"photo":photo,"comments":comments})
 @login_required(login_url="/accounts/login/")
 def logout(request):
