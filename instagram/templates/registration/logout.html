@@ -1,0 +1,34 @@
+{% extends 'registration/base.html' %}
+{% block content %}
+<style>
+.pro{
+    position:absolute;
+    top:20%;
+    left:46%;
+}
+h2{
+    position:absolute;
+    top:10%;
+    left:30%;
+    color:black;
+}
+body{
+	background-color:gray;
+	background-image:url(https://c1.wallpaperflare.com/preview/194/655/645/business-hands-instagram-iphone.jpg);
+	background-size:cover;
+}
+</style>
+<body>
+<h2>You have logged out of your account</h2>
+
+<div class="pro">
+    <small class="text-muted">
+        <a class="btn btn-primary" href="/accounts/login">Log in</a>
+    </small>
+</div>
+</body>
+
+
+
+
+{% endblock%}

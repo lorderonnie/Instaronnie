@@ -7,7 +7,7 @@ from . import views
 
 
 urlpatterns=[
-    url(r'^$',views.Gram,name = 'photo'),
+    url(r'^$',views.Gram,name = 'home'),
     path('instagram/profile/',views.profile,name="profile"),
     url(r'^updateprofile/$',views.updateprofile,name='updateprofile'),
     url(r'^search/',views.search_results,name = 'search_results'), 
@@ -16,11 +16,12 @@ urlpatterns=[
     path('follow/',views.follow,name='follow'),
     path('search/',views.search_results,name='search'),
     path('find/',views.find,name='find'),
+    url(r'^newpost/',views.newpost,name='newpost'),
     path('comment/new/<int:id>/',views.comment,name='comment'),
     path('comment/view/<int:id>/',views.comment_view,name='view')   
 ]
 
 if settings.DEBUG:
-    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 

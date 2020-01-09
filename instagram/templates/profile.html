@@ -2,12 +2,25 @@
 {% load bootstrap3 %}
 {% load static %}
 {% block content %}
-
+<style>
+body{
+	background-color:gray;
+	background-image:url(https://i.pinimg.com/originals/a5/c5/7f/a5c57f0ae6fd2064a7cf8e4ccfb14fd8.jpg);
+	background-size:cover;
+    color:white;
+    
+}
+h3{
+    font-size:40px;
+    font-family: 'Gelasio', serif;
+}
+</style>
+<body>
 <div class="container">
     <div class="row">
         <div class="col-md-6">
             {% if user.profile.profile_pic %}
-                <img style="background-color: transparent;" src=" {{user.profile.profile_pic.url}} " alt="dp">
+                <img style="background-color: transparent;border-radius:50%;" src=" {{user.profile.profile_pic.url}} " alt="dp" width="300px" height="300px">
             {% else %}
                 <img src="" alt="dp">
             {% endif %}
@@ -21,16 +34,16 @@
 
             {% endif %}
             
-            <a href="{% url 'updateprofile' %}" class="btn btn-danger"  name="Update" >Update</a>
+            <a href="{% url 'updateprofile'%}" class="btn btn-danger"  name="Update" >Update</a>
         </div>
-    </div>    
+    </div><br><br>
     <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 {% if my_posts %}
                 {% for post in my_posts %}
                 <div class="card">
-                    <img height="450px" width="400px" src=" {{post.ig_pic.url}} " alt="post_pic">
+                    <img height="450px" width="400px" src=" {{post.picture.url}} " alt="post_pic">
                     
                 </div>
                 {% endfor %}
@@ -42,4 +55,5 @@
 
     </div>
 </div>
+</body>
 {% endblock %}

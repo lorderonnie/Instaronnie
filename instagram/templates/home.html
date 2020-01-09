@@ -3,172 +3,51 @@
 <style>
 body{
 	background-color:gray;
-	background-image:url(https://ak7.picdn.net/shutterstock/videos/1007791927/thumb/1.jpg);
+	background-image:url(https://wallpaperplay.com/walls/full/9/0/3/215260.jpg);
 	background-size:cover;
 }
 h1{
-	color:gray;
+	color:black;
 	float:right;
 	font-size:70px;
 	position:absolute;
 	font-family: 'Gelasio', serif;
-	top:2%;
+	top:0%;
 	left:71%
 }
 
-  .box{
-    width: 1200px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    grid-gap: 15px;
-    margin: 0 auto;
-  }
-  .card{
-    position: absolute;
-	top:20%;
-	left:80%;
-    width: 200px;
-    height: 220px;
-    background: #fff;
-    margin: 0 auto;
-    border-radius: 4px;
-    box-shadow:0 2px 10px rgba(0,0,0,.2);
-  }
-  .card:before,
-  .card:after
-  {
-    content:"";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 4px;
-    background: #fff;
-    transition: 0.5s;
-    z-index:-1;
-  }
-  .card:hover:before{
-  transform: rotate(20deg);
-  box-shadow: 0 2px 20px rgba(0,0,0,.2);
-  }
-  .card:hover:after{
-  transform: rotate(10deg);
-  box-shadow: 0 2px 20px rgba(0,0,0,.2);
-  }
-  .card .imgBx{
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  bottom: 10px;
-  right: 10px;
-  background: #222;
-  transition: 0.5s;
-  z-index: 1;
-  }
-  
-  .card:hover .imgBx
-  {
-    bottom: 80px;
-  }
-
-  .card .imgBx img{
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-  }
-
-  .card .details{
-      position: absolute;
-      left: 10px;
-      right: 10px;
-      bottom: 10px;
-      height: 60px;
-      text-align: center;
-  }
-
-  .card .details h2{
-   margin: 0;
-   padding: 0;
-   font-weight: 600;
-   font-size: 20px;
-   color: #777;
-   text-transform: uppercase;
-  } 
-
-  .card .details h2 span{
-  font-weight: 500;
-  font-size: 16px;
-  color:purple;
-  display: block;
-  font-family: 'Fondamento', cursive;
-  margin-top: 5px;
-   } 
-  .from button[type=submit]{
- position:absolute;
-  top:2%;
-  left:57%;
-}
- .from input[type=text] {
-  float: right;
-  position:absolute;
-  top:1%;
-  left:37%;
-  padding: 6px;
-  background-color:transparent;
-  color:white;
-  border: none;
-  margin-top: 8px;
-  margin-right: 16px;
-  font-size: 17px;
-  
-}
 </style>
 
 <h1>Instaronnie</h1>
 
 <body>
-<div class="from">
- <form action="{% url 'search'%}" method="POST" enctype="multipart/form-data">
-    {% csrf_token%}
-    <input type="text" name="search"  placeholder="Search" />
-    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
-</form>
 
-</div>
-<div class="box">
-      <div class="card">
-        <div class="imgBx">
-            <img src="https://besthqwallpapers.com/Uploads/23-11-2019/112766/thumb2-instagram-green-logo-4k-green-brickwall-instagram-logo-brands.jpg" alt="images">
-        </div>
-        <div class="details">
-            <h2 style="color:black,font-family: 'Fondamento', cursive;">WELCOME TO <br><span>INSTARONNIE</span></h2>
-        </div>
-      </div>
-</div><br>
+
+
 <div class="container">
 <div class="row">
+
   {% for photo in photos %}
-  <div class="too" style="width:300px;height:250px;background-color:transparent;color:black; position:absolute; top:40%; left:26%;" >
+  <div class="col-md-4">
+  <div class="too" style="width:340px;height:400px;margin-top:160px; background-color:white; color:black; " >
+    <header style="background-color:black;color:white;">
     <h4 style="text-align: center;"  class="card-title pictitle"> {{photo.name}} </h4><br>
+    </header>
     <a href="/photo/{{photo.id}}">
-    <img class="timelinepics card-img-top" width="200px" height="170px" src=" {{photo.url}} " alt="Image"></a>
-    <div class="card-body">
-      
+    <img class=" card-img-top" width="340px" height="280px" src=" {{photo.picture.url}} " alt="Image"></a>
+    <div class="card-body" style="background-color:silver;color:black;font-size:20px;">
       <p style="text-align: center;" class="card-text">{{photo.caption}}</p>
       <p class="card-text">Posted by: {{photo.user}}</p>
-      <div class="card-footer">
+      
             <a href="{% url 'comment' photo.id%}" class="btn btn-outline "> <button>Comment</button></a>
             
-              
-      </div>
-      
     </div>
-</div>
+  </div>
+  </div>
+
 {% endfor %}
+</div>
+</div>
 </body>
 
 {% endblock %}

@@ -40,7 +40,7 @@ def follow(request):
     return redirect('home')
 
 @login_required(login_url = '/accounts/login/')
-def new_post(request):
+def newpost(request):
     if request.method=='POST':
         form = NewPostForm(request.POST,request.FILES)
         if form.is_valid():
@@ -53,7 +53,7 @@ def new_post(request):
     else:
         form = NewPostForm()
         
-    return render(request,'new_post.html',{'form':form})
+    return render(request,'newpost.html',{'form':form})
 
 
 def search_results(request):

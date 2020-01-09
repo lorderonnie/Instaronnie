@@ -1,9 +1,36 @@
 {% extends 'base.html'%} 
 {% block content %}
 <style>
+ .from button[type=submit]{
+  position:absolute;
+  top:2%;
+  left:57%;
+}
+ .from input[type=text] {
+  float: right;
+  position:absolute;
+  top:1%;
+  left:37%;
+  padding: 6px;
+  background-color:silver;
+  color:white;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+  
+}
 </style>
 
 <body>
+<div class="from">
+ <form action="{% url 'search' %}" role="search" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" name="search"  placeholder="Search" />
+    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+</form>
+
+</div><br><br>
 <div class="container"><br><br><br> 
 
   <div class="row">

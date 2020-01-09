@@ -45,7 +45,11 @@
   font-family: 'Prata', serif;
   background-color: purple;
 }
-
+#search {
+  top: 260px;
+  font-family: 'Prata', serif;
+  background-color: purple;
+}
 </style>
 <body>
 
@@ -53,8 +57,9 @@
 <div id="mySidenav" class="sidenav">
   <a href="/" id="about">Home</a>
   <a href="{% url 'profile'%}" id="blog">Profile</a>
-  <a href="/accounts/password/change" id="projects">change</a>
-  <a href="{% url 'logout'%}" id="contact">log out</a>
+  <a href="/newpost" id="projects">Post</a>
+  <a href="{% url 'search' %}" id="search">Search</a>
+  <a href="/accounts/logout" id="contact">log out</a>
 </div>
 
 </div>
