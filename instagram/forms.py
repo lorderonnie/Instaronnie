@@ -4,6 +4,16 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 from .models import Photos,Profile,Comments
+
+class PhotosForm(forms.ModelForm):
+    class Meta:
+        model = Photos
+        exclude = [
+            'posted_by',
+            'posted_date',
+            'liked',
+            'comments'
+]
 class UserUpdateform(forms.ModelForm):
   email = forms.EmailField()
   class Meta:
@@ -19,8 +29,7 @@ class UpdateProfileForm(forms.ModelForm):
         exclude =[
             'updated_on',
             'user',
-            'followers',
-            'following',
+
 ]
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -48,31 +57,8 @@ class NewPostForm(forms.ModelForm):
         model = Photos
         exclude = ['user','likes']
         
-# class RegisterForm(forms.ModelForm):
-#     email = forms.EmailField(label='Email')
-#     email2 = forms.EmailField(label='confirm email')
-#     username = forms.CharField(label='your username')
-#     password = forms.CharField(widget=forms.PasswordInput)
-    
-#     class Meta:
-#         model = User
-#         fields = [
-#             'username',
-#             'email',
-#             'email2',
-#             'password', 
-#         ]
-#     def clean_password(self):
-#         email = self.cleaned_data.get('email')
-#         email2 = self.cleaned_data.get('email2')
-#         username = self.cleaned_data.get('username')
 
-#         if email != email2:
-#             raise forms.ValidationError('email must match')
-#         user = User.objects.filter(username = username)
-#         if user.exists():
-#             raise forms.ValidationError('This username exists!')
-#         return username 
+    
 
 
 

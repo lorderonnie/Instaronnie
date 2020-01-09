@@ -107,11 +107,38 @@ h1{
   font-family: 'Fondamento', cursive;
   margin-top: 5px;
    } 
+  .from button[type=submit]{
+ position:absolute;
+  top:2%;
+  left:57%;
+}
+ .from input[type=text] {
+  float: right;
+  position:absolute;
+  top:1%;
+  left:37%;
+  padding: 6px;
+  background-color:transparent;
+  color:white;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+  
+}
 </style>
 
 <h1>Instaronnie</h1>
 
 <body>
+<div class="from">
+ <form action="{% url 'search'%}" method="POST" enctype="multipart/form-data">
+    {% csrf_token%}
+    <input type="text" name="search"  placeholder="Search" />
+    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+</form>
+
+</div>
 <div class="box">
       <div class="card">
         <div class="imgBx">

@@ -1,17 +1,32 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.datetime_safe import date
+import datetime
 
 class Profile(models.Model):
     '''
     this is a model class that defines how a user profile will be created
     '''
-    user  = models.OneToOneField(User, on_delete = models.CASCADE)
-    profile_pic = models.ImageField(upload_to = 'images/', default='default.jpg')
+    user  = models.OneToOneField(User, on_delete = models.CASCADE, default='')
+    profile_pic = models.ImageField(upload_to = 'media/', default='default.jpg')
     bio =models.TextField()
-    updated_on = models.DateTimeField(auto_now_add=True, default='')
-
-
+    updated_on = models.DateTimeField(auto_now_add=True)
+     
+    def __str__(self):
+        return f'{self.user.username} profile'
     
+    def search_user(cls,username):
+        '''
+        Function for searching a user
+        '''
+        found_user = User.objects.get(user= user)
+
+    def save_profile(self):
+        '''
+        Function for saving a profile
+        '''
+        self.save()
+
     @classmethod
     def get_profile_by_name(cls,name):
         '''
@@ -20,11 +35,7 @@ class Profile(models.Model):
         profile = cls.objects.filter(user = name)
 
         return  name 
-    # @classmethod
-    # def update_profile(cls,name):
-    #     profile = cls.objects.filter(user = name)
-        
-    #     return name
+   
 class Photos(models.Model):
     picture = models.ImageField(upload_to= 'media/')
     name = models.CharField(max_length=50)
@@ -66,3 +77,9 @@ class Comments(models.Model):
 
     def delete_comment(self):
         self.delete()
+        
+        
+        
+        
+        
+        
